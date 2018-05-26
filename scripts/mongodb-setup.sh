@@ -19,10 +19,6 @@ sudo apt-get update
 # Install the latest stable version of MongoDB
 sudo apt-get install -y mongodb-org
 
-################################################################################
-# New additions                                                                #
-################################################################################
-
-# Add data directions for mongod service
+# Add data directories for mongod service
 sudo mkdir /data
 sudo mkdir /data/db
