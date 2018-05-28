@@ -13,6 +13,8 @@ for YR in $(seq $START $END); do
 	continue
     fi
 
+    echo "Begin loading data for $YR.";
+
     # Download global hourly climate data for the year
     sudo wget https://www.ncei.noaa.gov/data/global-hourly/archive/$YR.tar.gz;
 
@@ -22,4 +24,6 @@ for YR in $(seq $START $END); do
     for weatherstationdata in ./*.csv; do
 	mongoimport -d noaaClimateData -c globalHourly --type csv --file "$weatherstationdata" --headerline && sudo rm -f "$weatherstationdata";
     done
+
+    echo "Done loading data for $YR.";
 done
