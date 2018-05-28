@@ -1,0 +1,4 @@
+sharding:
+  clusterRole: configSvr
+replication:
+replSetName:
