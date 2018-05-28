@@ -1,29 +1,32 @@
 #!/bin/bash
 
-# Adds hourly weather data from weatherstations around the globe into mongod
-
-cd ~/efs;
+# Loads hourly weather data from weather stations around the globe into mongod.
+# Note: Must have a mongod process running!
 
 START=2015
 END=2018
 
-for YR in $(seq $START $END); do
-    if [ $YR -eq 2017 ]; then
-	# Already loaded data for 2017
-	continue
-    fi
+mkdir temp/;
+cd temp/;
 
-    echo "Begin loading data for $YR.";
+for YR in $(seq $START $END); do
+
+    echo "+=============================+";
+    echo "| Begin loading data for $YR. |";
+    echo "+=============================+";
 
     # Download global hourly climate data for the year
-    sudo wget https://www.ncei.noaa.gov/data/global-hourly/archive/$YR.tar.gz;
+    wget https://www.ncei.noaa.gov/data/global-hourly/archive/$YR.tar.gz;
 
     # Extract contents
-    sudo tar -xzvf $YR.tar.gz;
+    tar -xzvf $YR.tar.gz;
     
     for weatherstationdata in ./*.csv; do
-	mongoimport -d noaaClimateData -c globalHourly --type csv --file "$weatherstationdata" --headerline && sudo rm -f "$weatherstationdata";
+	mongoimport -d noaaClimateData -c globalHourly --type csv --file "$weatherstationdata" --headerline && rm -f "$weatherstationdata";
     done
 
     echo "Done loading data for $YR.";
 done
+
+cd ../;
+rm -rf temp/;
