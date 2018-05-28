@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Mounts the EFS containing the test data sets to an instance. Note: your
 # instance needs to be added to our VPC security group for this script to work
 # since we need to hard-code the EFS id's. Alternatively, you can replace the
