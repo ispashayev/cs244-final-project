@@ -1,0 +1,3 @@
+[submodule "succinct/spark-ec2"]
+	path = succinct/spark-ec2
+	url = git@github.com:amplab/spark-ec2.git

@@ -1,3 +1,4 @@
 *.pem
 *~
 scripts/key_dump.dat
+succinct/succinct-project/target
