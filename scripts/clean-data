@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+NUM_SHARDS = 8
+
+from os import remove
+
+def clean_file(data_file):
+   with open(data_file, 'r') as i, open(data_file + '.csv', 'w') as o:
+      for line in i:
+         tokens = line.strip().split('|')[:-1]
+         o.write(','.join(tokens) + '\n')
+
+if __name__ == '__main__':
+   shard_sizes = ['10GB','12.5GB','5GB','6.25GB','7.5GB']
+   for size in shard_sizes:
+      for i in range(NUM_SHARDS):
+         datachunk_file = size + '/' + 'data_' + str(i)
+         print 'Converting %s into csv format...' % datachunk_file
+         clean_file(datachunk_file)
+         remove(datachunk_file)
+         print 'Done.'
+      

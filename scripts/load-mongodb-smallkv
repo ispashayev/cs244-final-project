@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Loads the smallkv dataset into a sharded database.
+# Note: Must have a mongos process running!
+
+PATH=/home/ubuntu/efs/smallkv;
+SHARD_SIZE=2.5GB;
+
+for chunk in $PATH/$SHARD_SIZE/*.csv; do
+    mongoimport -d benchmarks -c smallkv --type csv --file $chunk -f a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p --numInsertionWorkers 6;
+    echo "Inserted chunk $chunk into database.";
+done
+
+echo "Done inserting.";

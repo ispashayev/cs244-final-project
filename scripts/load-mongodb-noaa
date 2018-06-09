@@ -9,6 +9,8 @@ END=2018
 mkdir temp/;
 cd temp/;
 
+PWD="jps01ETTAWlBQbo8";
+
 for YR in $(seq $START $END); do
 
     echo "+==============================+";
@@ -22,7 +24,7 @@ for YR in $(seq $START $END); do
     tar -xzvf $YR.tar.gz;
     
     for weatherstationdata in ./*.csv; do
-	mongoimport -d noaaClimateData -c globalHourly --type csv --file $weatherstationdata --headerline && rm -f $weatherstationdata;
+	mongoimport --uri "mongodb+srv://iskandar-1:$PWD@test-cluster-xmbnx.mongodb.net/noaaWeatherData?retryWrites=true" --collection globalHourly --type csv --file $weatherstationdata --headerline && rm -f $weatherstationdata;
     done
 
     echo "Done loading data for $YR.";

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Workload C: 10,000 searches."
+while read key; do
+    mongo benchmarks --eval "db.smallkv.findOne({"a":$key})" > /dev/null;
+done < key_dump.dat
