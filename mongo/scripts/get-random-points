@@ -14,10 +14,10 @@ def dump_keys(in_file):
         print "Warning: unable to extract all keys."
     
     print "Extracted %s keys from %s." % (len(keys), in_file)
-    with open("key_dump.dat","w") as f:
+    with open("key_dump.dat","a") as f:
         for i in range(5000):
             f.write(keys.pop() + "\n")
 
 if __name__ == '__main__':
     dump_keys("/home/ubuntu/efs/smallkv/12.5GB/data_0.csv")
-    dump_keys("/home/ubuntu/efs/smallkv/12.5GB/data_2.csv")
+    dump_keys("/home/ubuntu/efs/smallkv/12.5GB/data_3.csv")

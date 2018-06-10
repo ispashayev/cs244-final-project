@@ -11,10 +11,11 @@ def clean_file(data_file):
          o.write(','.join(tokens) + '\n')
 
 if __name__ == '__main__':
+   prefix_path = '/home/ubuntu/efs/smallkv/'
    shard_sizes = ['10GB','12.5GB','5GB','6.25GB','7.5GB']
    for size in shard_sizes:
       for i in range(NUM_SHARDS):
-         datachunk_file = size + '/' + 'data_' + str(i)
+         datachunk_file = prefix_path + size + '/' + 'data_' + str(i)
          print 'Converting %s into csv format...' % datachunk_file
          clean_file(datachunk_file)
          remove(datachunk_file)
